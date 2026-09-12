@@ -1,4 +1,9 @@
 const express = require("express");
+const dotenv = require("dotenv");
+
+dotenv.config();
+
+const connectDB = require("./config/db");
 
 const app = express();
 
@@ -6,25 +11,12 @@ const PORT = 3000;
 
 app.use(express.json());
 
-app.get("/api" , (req,res) => {
-    res.json({
-        message : "Welcome to DevCon API"
-    });
-});
+connectDB();
 
-app.get("/api/test", (req, res) => {
-    res.json({
-        message: "Test route is working"
-    });
-});
+const testRoutes = require("./routes/testRoute");
 
-app.post("/api/test",(req,res) => {
-    console.log(req.body);
+app.use("/api", testRoutes);
 
-    res.json({
-        message : "data recieved successfully"
-    })
-})
 
 app.listen(PORT, () => {
     console.log(`DevCon server is running on port ${PORT}`);
