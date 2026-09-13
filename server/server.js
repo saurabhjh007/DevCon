@@ -14,8 +14,10 @@ app.use(express.json());
 connectDB();
 
 const testRoutes = require("./routes/testRoute");
+const authRoutes = require("./routes/authRoute");
 
 app.use("/api", testRoutes);
+app.use("/api/auth", authRoutes);
 
 
 app.listen(PORT, () => {
