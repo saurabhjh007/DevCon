@@ -15,9 +15,11 @@ connectDB();
 
 const testRoutes = require("./routes/testRoute");
 const authRoutes = require("./routes/authRoute");
+const userRoutes = require("./routes/userRoute");
 
 app.use("/api", testRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
 
 
 app.listen(PORT, () => {
