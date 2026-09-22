@@ -3,14 +3,22 @@ const express = require("express");
 const router = express.Router();
 
 const authMiddleware = require("../middleware/authMiddleware");
+const {
+    getProfileController,
+    updateProfileController} = require("../controllers/userController");
 
-router.get("/profile", authMiddleware, (req, res) => {
+router.get(
+    "/profile",
+    authMiddleware,
+    getProfileController
+);
 
-    res.json({
-        message: "Profile route accessed successfully",
-        userId: req.user.userId
-    });
+router.put(
+    "/profile",
+    authMiddleware,
+    updateProfileController
+);
 
-});
+
 
 module.exports = router;
