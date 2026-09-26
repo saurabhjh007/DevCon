@@ -1,19 +1,38 @@
-import React from 'react'
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
-const navbar = () => {
-  return (
-    <nav>
-        DevCon
+const Navbar = () => {
 
-        <div>
-            <Link to="/">Home</Link>
-            <Link to="/login">login</Link>
-            <Link to="/register">register</Link>
-            <Link to="/profile">profile</Link>
-        </div>
-    </nav>
-  );
+    const [isLoggedIn, setIsLoggedIn] = useState(
+        !!localStorage.getItem("token")
+    );
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        setIsLoggedIn(false);
+    };
+
+    return (
+        <nav>
+            <h2>DevCon</h2>
+
+            <div>
+                <Link to="/">Home</Link>
+
+                {isLoggedIn ? (
+                    <>
+                        <Link to="/profile">Profile</Link>
+                        <button onClick={handleLogout}>Logout</button>
+                    </>
+                ) : (
+                    <>
+                        <Link to="/login">Login</Link>
+                        <Link to="/register">Register</Link>
+                    </>
+                )}
+            </div>
+        </nav>
+    );
 };
 
-export default navbar;
+export default Navbar;

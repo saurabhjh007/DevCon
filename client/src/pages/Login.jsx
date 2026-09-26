@@ -18,7 +18,8 @@ const Login = () => {
           password
          }
       );
-      console.log(response.data);
+      console.log("login success");
+      localStorage.setItem("token",response.data.token);
     }
     catch(error){
       console.log(error.response.data);
